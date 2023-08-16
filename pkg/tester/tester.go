@@ -1,6 +1,7 @@
 package tester
 
 import (
+	"bufio"
 	"errors"
 	"fmt"
 	"io/fs"
@@ -34,11 +35,11 @@ func (t *Tester) RunTests() {
 		}
 
 		result, err := t.RunTest(inFileName, outFileName)
-		fmt.Printf("Test #%d: %v\n", nr, result)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Printf("Test #%d error: %s\n", nr, err.Error())
 			return
 		}
+		fmt.Printf("Test #%d: %v\n", nr, result)
 
 		nr++
 	}
@@ -46,7 +47,8 @@ func (t *Tester) RunTests() {
 
 func allFilesExists(paths ...string) (bool, error) {
 	for _, path := range paths {
-		_, err := os.OpenFile(path, os.O_RDONLY, 0600)
+		f, err := os.OpenFile(path, os.O_RDONLY, 0600)
+		f.Close()
 		if errors.Is(err, fs.ErrNotExist) {
 			return false, nil
 		}
@@ -58,16 +60,25 @@ func allFilesExists(paths ...string) (bool, error) {
 }
 
 func (t *Tester) RunTest(inFileName, outFileName string) (bool, error) {
-	in, err := os.ReadFile(inFileName)
+	in, err := os.OpenFile(inFileName, os.O_RDONLY, 0600)
 	if err != nil {
 		return false, fmt.Errorf("cant read in file: %w", err)
 	}
+	defer in.Close()
+
 	out, err := os.ReadFile(outFileName)
 	if err != nil {
 		return false, fmt.Errorf("cant read out file: %w", err)
 	}
 
-	args := []string{string(in)}
+	var args []string
+	fileScanner := bufio.NewScanner(in)
+	fileScanner.Split(bufio.ScanLines)
+
+	for fileScanner.Scan() {
+		args = append(args, fileScanner.Text())
+	}
+
 	expected := strings.TrimSpace(string(out))
 	actual, err := t.task.Run(args)
 	if err != nil {

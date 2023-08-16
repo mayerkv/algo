@@ -19,7 +19,7 @@ func Recursive(a float64, n int) float64 {
 	return Recursive(a, n-1) * a
 }
 
-// Binary O(log N)
+// Binary O(2LogN) = O(LogN)
 func Binary(a float64, n int) float64 {
 	if n == 0 {
 		return 1.0
@@ -33,3 +33,5 @@ func Binary(a float64, n int) float64 {
 	}
 	return a * Binary(a, n-1)
 }
+
+// todo домножение
