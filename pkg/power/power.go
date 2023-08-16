@@ -2,6 +2,7 @@ package power
 
 type Power func(a float64, n int) float64
 
+// Iterative O(N)
 func Iterative(a float64, n int) float64 {
 	res := 1.0
 	for i := 0; i < n; i++ {
@@ -10,6 +11,7 @@ func Iterative(a float64, n int) float64 {
 	return res
 }
 
+// Recursive O(N)
 func Recursive(a float64, n int) float64 {
 	if n == 0 {
 		return 1.0
@@ -17,6 +19,7 @@ func Recursive(a float64, n int) float64 {
 	return Recursive(a, n-1) * a
 }
 
+// Binary O(log N)
 func Binary(a float64, n int) float64 {
 	if n == 0 {
 		return 1.0
