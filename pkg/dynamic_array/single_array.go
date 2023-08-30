@@ -16,28 +16,24 @@ func (a *SingleArray[T]) Add(item T, index int) {
 		newSize = index + 1
 	}
 	arr := make([]T, newSize, newSize)
-	for idx := range a.arr {
-		if idx < index {
-			arr[idx] = a.arr[idx]
-		} else {
-			arr[idx+1] = a.arr[idx]
-		}
+	pos := index
+	if index > len(a.arr) {
+		pos = len(a.arr)
 	}
+	copy(arr[0:pos], a.arr[0:pos])
+	copy(arr[pos+1:], a.arr[pos:])
 	arr[index] = item
 	a.arr = arr
 }
 
-func (a *SingleArray[T]) Remove(index int) (value T) {
+func (a *SingleArray[T]) Remove(index int) T {
+	var noob T
 	if index >= len(a.arr) {
-		return value
+		return noob
 	}
-	value = a.arr[index]
-	var noop T
-	a.arr[index] = noop
-	for idx := range a.arr {
-		if idx > index {
-			a.arr[idx-1], a.arr[idx] = a.arr[idx], a.arr[idx-1]
-		}
-	}
+	value := a.arr[index]
+	lastIdx := len(a.arr) - 1
+	copy(a.arr[index:], a.arr[index+1:])
+	a.arr[lastIdx] = noob
 	return value
 }
