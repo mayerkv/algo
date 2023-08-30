@@ -176,3 +176,27 @@ func TestFactorArray_Remove(t *testing.T) {
 		)
 	}
 }
+
+func BenchmarkFactorArray_Add(b *testing.B) {
+	a := &FactorArray[int]{
+		arr:    make([]int, b.N),
+		factor: 50,
+		size:   b.N,
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		a.Add(b.N, i)
+	}
+}
+
+func BenchmarkFactorArray_Remove(b *testing.B) {
+	a := &FactorArray[int]{
+		arr:    make([]int, b.N),
+		factor: 50,
+		size:   b.N,
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		a.Remove(i)
+	}
+}

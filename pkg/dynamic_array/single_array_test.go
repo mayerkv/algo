@@ -151,3 +151,23 @@ func TestSingleArray_Remove(t *testing.T) {
 		)
 	}
 }
+
+func BenchmarkSingleArray_Add(b *testing.B) {
+	a := &SingleArray[int]{
+		arr: make([]int, b.N),
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		a.Add(b.N, i)
+	}
+}
+
+func BenchmarkSingleArray_Remove(b *testing.B) {
+	a := &SingleArray[int]{
+		arr: make([]int, b.N),
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		a.Remove(i)
+	}
+}

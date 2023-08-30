@@ -168,3 +168,27 @@ func TestVectorArray_Remove(t *testing.T) {
 		)
 	}
 }
+
+func BenchmarkVectorArray_Add(b *testing.B) {
+	a := &VectorArray[int]{
+		arr:    make([]int, b.N),
+		vector: 10,
+		size:   b.N,
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		a.Add(b.N, i)
+	}
+}
+
+func BenchmarkVectorArray_Remove(b *testing.B) {
+	a := &VectorArray[int]{
+		arr:    make([]int, b.N),
+		vector: 10,
+		size:   b.N,
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		a.Remove(i)
+	}
+}
