@@ -4,42 +4,40 @@ type SingleArray[T any] struct {
 	arr []T
 }
 
-func NewSingleArray[T any]() *SingleArray[T] {
+func NewSingleArray[T any]() Array[T] {
 	return &SingleArray[T]{
 		arr: make([]T, 0, 0),
 	}
 }
 
 func (a *SingleArray[T]) Add(item T, index int) {
-	capacity := cap(a.arr)
-	if index > capacity-1 {
-		newArr := make([]T, index+1)
-		for idx, i := range a.arr {
-			newArr[idx] = i
-		}
-		a.arr = newArr
+	newSize := len(a.arr) + 1
+	if index >= newSize {
+		newSize = index + 1
 	}
-	a.arr[index] = item
+	arr := make([]T, newSize, newSize)
+	for idx := range a.arr {
+		if idx < index {
+			arr[idx] = a.arr[idx]
+		} else {
+			arr[idx+1] = a.arr[idx]
+		}
+	}
+	arr[index] = item
+	a.arr = arr
 }
 
-func (a *SingleArray[T]) Remove(index int) T {
-	capacity := cap(a.arr)
-	if index > capacity-1 {
-		panic("out of range")
+func (a *SingleArray[T]) Remove(index int) (value T) {
+	if index >= len(a.arr) {
+		return value
 	}
-	item := a.arr[index]
-	newArr := make([]T, capacity-1)
-	for idx, i := range a.arr {
-		if idx == index {
-			continue
-		}
-		if idx < index {
-			newArr[idx] = i
-		} else {
-			newArr[idx-1] = i
+	value = a.arr[index]
+	var noop T
+	a.arr[index] = noop
+	for idx := range a.arr {
+		if idx > index {
+			a.arr[idx-1], a.arr[idx] = a.arr[idx], a.arr[idx-1]
 		}
 	}
-	a.arr = newArr
-
-	return item
+	return value
 }
