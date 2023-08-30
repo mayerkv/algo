@@ -44,7 +44,7 @@ func (a *VectorArray[T]) allocForIndex(index int) []T {
 	capacity := len(a.arr)
 	newSize := a.size + 1
 	if index > capacity {
-		newSize = index
+		newSize = index + 1
 	}
 	if newSize <= capacity {
 		return a.arr
