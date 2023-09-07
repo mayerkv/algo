@@ -12,6 +12,7 @@ func BenchmarkSort(b *testing.B) {
 		fn   func(int) []int
 	}{
 		{"Random", Random},
+		{"Digits", Digits},
 		{"Sorted", Sorted},
 		{"Reversed", Reversed},
 	}

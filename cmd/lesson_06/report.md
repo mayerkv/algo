@@ -1,31 +1,38 @@
-Timing
+Тайминги по сортировке массива из случайных чисел
 ```shell
-Bubble(100): 32.375µs
-Insertion(100): 18.209µs
-InsertionShift(100): 20.667µs
-InsertionBinary(100): 8.125µs
-Shell(100): 15.625µs
+Bubble(100): 17.333µs
+Insertion(100): 8.167µs
+InsertionShift(100): 20.792µs
+InsertionBinary(100): 8.166µs
+Shell(100): 13.042µs
 
-Bubble(1000): 1.595291ms
-Insertion(1000): 1.062375ms
-InsertionShift(1000): 516.042µs
-InsertionBinary(1000): 367.834µs
-Shell(1000): 152.5µs
+Bubble(1000): 1.825166ms
+Insertion(1000): 1.160583ms
+InsertionShift(1000): 513.208µs
+InsertionBinary(1000): 367.792µs
+Shell(1000): 153.791µs
 
-Bubble(10000): 81.127208ms
-Insertion(10000): 36.222292ms
-InsertionShift(10000): 12.586666ms
-InsertionBinary(10000): 12.009208ms
-Shell(10000): 772.667µs
+Bubble(10000): 81.379916ms
+Insertion(10000): 36.503167ms
+InsertionShift(10000): 12.762583ms
+InsertionBinary(10000): 12.13625ms
+Shell(10000): 776.375µs
 
-Bubble(100000): 10.814142875s
-Insertion(100000): 3.597799042s
-InsertionShift(100000): 1.220421333s
-InsertionBinary(100000): 1.194090667s
-Shell(100000): 11.186333ms
+Bubble(100000): 10.869929458s
+Insertion(100000): 3.588174458s
+InsertionShift(100000): 1.230636792s
+InsertionBinary(100000): 1.194615s
+Shell(100000): 11.221417ms
+
+Bubble(1000000): timeout
+Insertion(1000000): timeout
+InsertionShift(1000000): timeout
+InsertionBinary(1000000): timeout
+Shell(1000000): 199.692333ms
+
 ```
 
-Benchmark
+Бенчмарки для разных характеров данных
 ```shell
 go test ./pkg/sort/... -bench ^BenchmarkSort
 goos: darwin
