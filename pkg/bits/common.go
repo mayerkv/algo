@@ -9,6 +9,8 @@ const (
 	nAB                   = 0xfcfcfcfcfcfcfcfc
 	nH                    = rightMask
 	nGH                   = 0x3f3f3f3f3f3f3f3f
+	diagonalLeft          = 0x102040810204080
+	a1h8diagonal          = 0x8040201008040201
 )
 
 var bits [256]int
