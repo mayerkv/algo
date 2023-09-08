@@ -9,6 +9,11 @@ import (
 	"strings"
 )
 
+const (
+	MaxBufferSize         = 1024 * 1024 * 80 // 80 Mb
+	InitialBufferCapacity = 64 * 1024        // 64 Kb
+)
+
 type Tester struct {
 	task Task
 	path string
@@ -74,6 +79,8 @@ func (t *Tester) RunTest(inFileName, outFileName string) (bool, error) {
 	var args []string
 	fileScanner := bufio.NewScanner(in)
 	fileScanner.Split(bufio.ScanLines)
+	buf := make([]byte, 0, InitialBufferCapacity)
+	fileScanner.Buffer(buf, MaxBufferSize)
 
 	for fileScanner.Scan() {
 		args = append(args, fileScanner.Text())

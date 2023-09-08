@@ -2,12 +2,19 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/mayerkv/algo/pkg/sort"
+	"github.com/mayerkv/algo/pkg/tester"
 )
 
 func main() {
+	tests2()
+}
+
+func tests1() {
 	cases := []struct {
 		name   string
 		sorter sort.Sorter[int]
@@ -23,7 +30,7 @@ func main() {
 		arr := sort.Random(size)
 		timeout := getTimeoutForSize(size)
 		for _, c := range cases {
-			d, err := withTimeout(c.sorter, arr, timeout)
+			d, err := withTimeout(c.sorter, copyArr(arr), timeout)
 			if err != nil {
 				fmt.Printf("%s(%d): %s\n", c.name, size, err)
 			} else {
@@ -32,6 +39,80 @@ func main() {
 		}
 		fmt.Println()
 	}
+}
+
+func tests2() {
+	tests := []*tester.Tester{
+		tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+
+		tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+
+		tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+
+		tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+	}
+	for _, t := range tests {
+		t.RunTests()
+	}
+}
+
+type sortTask struct {
+	fn sort.Sorter[int]
+}
+
+func (t *sortTask) Run(args []string) (string, error) {
+	if len(args) < 2 {
+		panic("invalid arguments")
+	}
+
+	n, err := strconv.Atoi(args[0])
+	if err != nil {
+		return "", fmt.Errorf("parse array length: %w", err)
+	}
+
+	arr := make([]int, 0, n)
+	for _, s := range strings.Split(args[1], " ") {
+		i, err := strconv.Atoi(s)
+		if err != nil {
+			return "", fmt.Errorf("parse number (%s): %w", s, err)
+		}
+		arr = append(arr, i)
+	}
+
+	_, err = withTimeout(t.fn, arr, getTimeoutForSize(len(arr)))
+	if err != nil {
+		return "", err
+	}
+
+	return sliceToString(arr), nil
+}
+
+func sliceToString(arr []int) string {
+	builder := strings.Builder{}
+	n := len(arr)
+	for idx, i := range arr {
+		builder.WriteString(strconv.Itoa(i))
+		if idx < n-1 {
+			builder.WriteRune(' ')
+		}
+	}
+	return builder.String()
 }
 
 func getTimeoutForSize(size int) time.Duration {
@@ -43,8 +124,7 @@ func getTimeoutForSize(size int) time.Duration {
 }
 
 func withTimeout(sorter sort.Sorter[int], arr []int, timeout time.Duration) (time.Duration, error) {
-	clone := copyArr(arr)
-	ch := handle(sorter, clone)
+	ch := handle(sorter, arr)
 	timer := time.NewTimer(timeout)
 
 	select {
