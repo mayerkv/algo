@@ -11,19 +11,21 @@ import (
 )
 
 func main() {
-	tests2()
+	runTests()
 }
 
-func tests1() {
+func report() {
 	cases := []struct {
 		name   string
 		sorter sort.Sorter[int]
 	}{
-		{"Bubble", sort.BubbleSort[int]},
-		{"Insertion", sort.Insertion[int]},
-		{"InsertionShift", sort.InsertionShift[int]},
-		{"InsertionBinary", sort.InsertionBinary[int]},
-		{"Shell", sort.Shell[int]},
+		//{"Bubble", sort.BubbleSort[int]},
+		//{"Insertion", sort.Insertion[int]},
+		//{"InsertionShift", sort.InsertionShift[int]},
+		//{"InsertionBinary", sort.InsertionBinary[int]},
+		//{"Shell", sort.Shell[int]},
+		{"SelectionSort", sort.SelectionSort[int]},
+		{"HeapSort", sort.HeapSort[int]},
 	}
 
 	for size := 100; size <= 1_000_000; size *= 10 {
@@ -41,31 +43,39 @@ func tests1() {
 	}
 }
 
-func tests2() {
+func runTests() {
 	tests := []*tester.Tester{
-		tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
-		tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
-		tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
-		tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
-		tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 
-		tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
-		tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
-		tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
-		tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
-		tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 
-		tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
-		tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
-		tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
-		tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
-		tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 
-		tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
-		tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
-		tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
-		tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
-		tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 	}
 	for _, t := range tests {
 		t.RunTests()

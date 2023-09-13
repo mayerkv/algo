@@ -40,6 +40,14 @@ func BenchmarkSort(b *testing.B) {
 			name: "Shell",
 			sort: Shell[int],
 		},
+		{
+			name: "SelectionSort",
+			sort: SelectionSort[int],
+		},
+		{
+			name: "HeapSort",
+			sort: HeapSort[int],
+		},
 	}
 	for _, g := range generators {
 		b.Run(
