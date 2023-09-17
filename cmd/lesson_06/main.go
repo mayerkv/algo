@@ -24,11 +24,13 @@ func report() {
 		//{"InsertionShift", sort.InsertionShift[int]},
 		//{"InsertionBinary", sort.InsertionBinary[int]},
 		//{"Shell", sort.Shell[int]},
-		{"SelectionSort", sort.SelectionSort[int]},
-		{"HeapSort", sort.HeapSort[int]},
+		//{"SelectionSort", sort.SelectionSort[int]},
+		//{"HeapSort", sort.HeapSort[int]},
+		{"QuickSort", sort.QuickSort[int]},
+		{"MergeSort", sort.MergeSort[int]},
 	}
 
-	for size := 100; size <= 1_000_000; size *= 10 {
+	for size := 100; size <= 10_000_000; size *= 10 {
 		arr := sort.Random(size)
 		timeout := getTimeoutForSize(size)
 		for _, c := range cases {
@@ -50,32 +52,40 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 		//tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
-		tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
-		tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
-		tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
-		tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
-		tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
-		tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.InsertionShift[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.InsertionBinary[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
-		tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
-		tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 	}
 	for _, t := range tests {
 		t.RunTests()

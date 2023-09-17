@@ -25,9 +25,9 @@ HeapSort(100000): 9.102375ms
 
 ### Бенчмарки для разных характеров данных
 ```shell
-BenchmarkSort/Random/100/Bubble-8                 275692              4337 ns/op
-BenchmarkSort/Random/100/Insertion-8              287878              4152 ns/op
-BenchmarkSort/Random/100/InsertionShift-8         532851              2168 ns/op
+BenchmarkSort/Random/100/Bubble-8                         275692              4337 ns/op
+BenchmarkSort/Random/100/Insertion-8                      287878              4152 ns/op
+BenchmarkSort/Random/100/InsertionShift-8                 532851              2168 ns/op
 BenchmarkSort/Random/100/InsertionBinary-8                690742              1703 ns/op
 BenchmarkSort/Random/100/Shell-8                         1525213               787.6 ns/op
 BenchmarkSort/Random/100/SelectionSort-8                  290318              4119 ns/op

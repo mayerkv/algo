@@ -48,6 +48,14 @@ func BenchmarkSort(b *testing.B) {
 			name: "HeapSort",
 			sort: HeapSort[int],
 		},
+		{
+			name: "MergeSort",
+			sort: MergeSort[int],
+		},
+		{
+			name: "QuickSort",
+			sort: QuickSort[int],
+		},
 	}
 	for _, g := range generators {
 		b.Run(
