@@ -26,8 +26,9 @@ func report() {
 		//{"Shell", sort.Shell[int]},
 		//{"SelectionSort", sort.SelectionSort[int]},
 		//{"HeapSort", sort.HeapSort[int]},
-		{"QuickSort", sort.QuickSort[int]},
-		{"MergeSort", sort.MergeSort[int]},
+		//{"QuickSort", sort.QuickSort[int]},
+		//{"MergeSort", sort.MergeSort[int]},
+		{"BucketSort", sort.BucketSort[int]},
 	}
 
 	for size := 100; size <= 10_000_000; size *= 10 {
