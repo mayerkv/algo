@@ -39,12 +39,9 @@ func BenchmarkQuickSort(b *testing.B) {
 	for _, size := range inputSize {
 		b.Run(
 			fmt.Sprintf("input_size_%d", size), func(b *testing.B) {
-				testList := Random(size)
-				b.ResetTimer()
 				for i := 0; i < b.N; i++ {
-					clone := make([]int, size)
-					copy(clone, testList)
-					QuickSort(clone)
+					testList := Random(size)
+					QuickSort(testList)
 				}
 			},
 		)

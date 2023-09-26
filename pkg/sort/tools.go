@@ -9,7 +9,7 @@ func Random(n int) []int {
 	rnd := rand.New(src)
 	arr := make([]int, n)
 	for i := 0; i < n; i++ {
-		arr[i] = rnd.Intn(n)
+		arr[i] = rnd.Intn(1000)
 	}
 	return arr
 }

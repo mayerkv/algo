@@ -54,8 +54,9 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 		//tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 		//tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
-		tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
-		tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		//tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.BucketSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
@@ -64,8 +65,9 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
-		tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
-		tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		//tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.BucketSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
@@ -74,8 +76,9 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
-		tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
-		tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		//tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.BucketSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
@@ -84,8 +87,9 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.Shell[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.SelectionSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.HeapSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
-		tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
-		tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		//tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.BucketSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 	}
 	for _, t := range tests {
 		t.RunTests()
