@@ -3,6 +3,7 @@ package sort
 func BucketSort[T Int](arr []T) {
 	n := len(arr)
 	m := max(arr) + 1
+
 	bucket := make([]*list[T], n)
 	for _, value := range arr {
 		nr := value * T(n) / m
@@ -11,6 +12,7 @@ func BucketSort[T Int](arr []T) {
 		}
 		bucket[nr].addSort(value)
 	}
+
 	var j int
 	for _, b := range bucket {
 		if b == nil {
@@ -44,22 +46,18 @@ type list[T Int] struct {
 }
 
 func (l *list[T]) addSort(value T) {
+	var prev *node[T]
+	curr := l.head
 	n := &node[T]{value, nil}
-	if l.head == nil {
-		l.head = n
-		return
+	for curr != nil && n.value > curr.value {
+		prev, curr = curr, curr.next
 	}
-	var curr *node[T]
-	next := l.head
-	for next != nil && n.value > next.value {
-		curr, next = next, next.next
-	}
-	if curr == nil {
+	if prev == nil {
 		l.head = n
 	} else {
-		curr.next = n
+		prev.next = n
 	}
-	n.next = next
+	n.next = curr
 }
 
 func (l *list[T]) iterator() *iterator[T] {
