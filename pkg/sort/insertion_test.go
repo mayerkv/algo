@@ -138,3 +138,30 @@ func BenchmarkInsertionBinary(b *testing.B) {
 		)
 	}
 }
+
+func TestInsertionT(t *testing.T) {
+	type args struct {
+		arr []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "random",
+			args: args{
+				arr: []int{5, 8, 3, 4, 2, 0, 7, 1, 9, 6},
+			},
+			want: []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(
+			tt.name, func(t *testing.T) {
+				InsertionT[intSlice](tt.args.arr)
+				require.Equal(t, tt.want, tt.args.arr)
+			},
+		)
+	}
+}

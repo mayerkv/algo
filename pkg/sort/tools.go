@@ -62,22 +62,16 @@ func more[T Ordered](arr []T, i, j int) bool {
 	return arr[i] > arr[j]
 }
 
-// L=2X+1
-// R=2X+2
-// P=(x-1)/2
-func heapify[T Ordered](arr []T, root, size int) {
-	x := root
-	l := 2*x + 1
-	r := 2*x + 2
-	if l < size && arr[l] > arr[x] {
-		x = l
-	}
-	if r < size && arr[r] > arr[x] {
-		x = r
-	}
-	if x == root {
-		return
-	}
-	swap(arr, root, x)
-	heapify(arr, x, size)
+type intSlice []int
+
+func (s intSlice) Len() int {
+	return len(s)
+}
+
+func (s intSlice) Less(i, j int) bool {
+	return s[i] < s[j]
+}
+
+func (s intSlice) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
 }

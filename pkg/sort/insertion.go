@@ -1,5 +1,7 @@
 package sort
 
+import "sort"
+
 func Insertion[T Ordered](arr []T) {
 	n := len(arr)
 	if n <= 1 {
@@ -8,6 +10,18 @@ func Insertion[T Ordered](arr []T) {
 	for j := 1; j < n; j++ {
 		for i := j - 1; i >= 0 && arr[i] > arr[i+1]; i-- {
 			arr[i], arr[i+1] = arr[i+1], arr[i]
+		}
+	}
+}
+
+func InsertionT[T sort.Interface](arr T) {
+	n := arr.Len()
+	if n < 2 {
+		return
+	}
+	for i := 1; i < n; i++ {
+		for j := i - 1; j >= 0 && arr.Less(j+1, j); j-- {
+			arr.Swap(j, j+1)
 		}
 	}
 }
