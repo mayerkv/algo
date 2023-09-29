@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	runTests()
+	report()
 }
 
 func report() {
@@ -28,14 +28,18 @@ func report() {
 		//{"HeapSort", sort.HeapSort[int]},
 		//{"QuickSort", sort.QuickSort[int]},
 		//{"MergeSort", sort.MergeSort[int]},
-		{"BucketSort", sort.BucketSort[int]},
+		//{"BucketSort", sort.BucketSort[int]},
+		//{"CountSort", sort.CountSort[int]},
+		{"RadixSort", sort.RadixSort[int]},
 	}
 
-	for size := 100; size <= 10_000_000; size *= 10 {
+	for size := 100; size <= 1_000_000_000; size *= 10 {
 		arr := sort.Random(size)
+		clone := make([]int, size)
 		timeout := getTimeoutForSize(size)
 		for _, c := range cases {
-			d, err := withTimeout(c.sorter, copyArr(arr), timeout)
+			copy(clone, arr)
+			d, err := withTimeout(c.sorter, clone, timeout)
 			if err != nil {
 				fmt.Printf("%s(%d): %s\n", c.name, size, err)
 			} else {
@@ -58,6 +62,8 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 		//tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 		tester.NewTester(&sortTask{fn: sort.BucketSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.CountSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
+		tester.NewTester(&sortTask{fn: sort.RadixSort[int]}, "/Users/kmayer/Downloads/sorting-tests/0.random"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
@@ -69,6 +75,8 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		//tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 		tester.NewTester(&sortTask{fn: sort.BucketSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.CountSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
+		tester.NewTester(&sortTask{fn: sort.RadixSort[int]}, "/Users/kmayer/Downloads/sorting-tests/1.digits"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
@@ -80,6 +88,8 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		//tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 		tester.NewTester(&sortTask{fn: sort.BucketSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.CountSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
+		tester.NewTester(&sortTask{fn: sort.RadixSort[int]}, "/Users/kmayer/Downloads/sorting-tests/2.sorted"),
 
 		//tester.NewTester(&sortTask{fn: sort.BubbleSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.Insertion[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
@@ -91,6 +101,8 @@ func runTests() {
 		//tester.NewTester(&sortTask{fn: sort.QuickSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		//tester.NewTester(&sortTask{fn: sort.MergeSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 		tester.NewTester(&sortTask{fn: sort.BucketSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.CountSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
+		tester.NewTester(&sortTask{fn: sort.RadixSort[int]}, "/Users/kmayer/Downloads/sorting-tests/3.revers"),
 	}
 	for _, t := range tests {
 		t.RunTests()

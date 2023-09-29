@@ -56,6 +56,18 @@ func BenchmarkSort(b *testing.B) {
 			name: "QuickSort",
 			sort: QuickSort[int],
 		},
+		{
+			name: "BucketSort",
+			sort: BucketSort[int],
+		},
+		{
+			name: "CountSort",
+			sort: CountSort[int],
+		},
+		{
+			name: "RadixSort",
+			sort: RadixSort[int],
+		},
 	}
 	for _, g := range generators {
 		b.Run(
@@ -64,12 +76,12 @@ func BenchmarkSort(b *testing.B) {
 					b.Run(
 						fmt.Sprint(size), func(b *testing.B) {
 							arr := g.fn(size)
+							clone := make([]int, size)
 							b.ResetTimer()
 							for _, c := range cases {
 								b.Run(
 									c.name, func(b *testing.B) {
 										for i := 0; i < b.N; i++ {
-											clone := make([]int, size)
 											copy(clone, arr)
 											c.sort(clone)
 										}
