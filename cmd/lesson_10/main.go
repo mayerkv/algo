@@ -9,15 +9,18 @@ import (
 )
 
 func main() {
-	n := 100_000_0
-	testRandom(n)
-	testOrdered(n)
+	//n := 10_000_000
+	//testRandom(n)
+	//testOrdered(n)
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	bst := search.CreateBST(arr)
+	bst.PreOrder()
 }
 
 func testRandom(max int) {
-	fmt.Printf("Test random\n")
+	fmt.Println("Test random")
 	for n := 1_000; n <= max; n *= 10 {
-		bst := search.NewBST()
+		bst := search.NewAVL()
 		testInsert(newRandomIterator(n), bst)
 		testSearch(newRandomIterator(n/10), bst)
 		testRemove(newRandomIterator(n/10), bst)
@@ -25,8 +28,8 @@ func testRandom(max int) {
 }
 
 func testOrdered(max int) {
-	fmt.Printf("Test asc ordered\n")
-	bst := search.NewBST()
+	fmt.Println("Test asc ordered")
+	bst := search.NewAVL()
 	for n := 1_000; n <= max; n *= 10 {
 		testInsert(newAscOrderIterator(n), bst)
 		testSearch(newAscOrderIterator(n/10), bst)

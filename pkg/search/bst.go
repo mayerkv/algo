@@ -25,9 +25,9 @@ func (t *BST) Insert(x int) {
 func (t *BST) Search(x int) bool {
 	var curr = t.root
 	for curr != nil {
-		if curr.value == x {
+		if curr.key == x {
 			return true
-		} else if curr.value > x {
+		} else if curr.key > x {
 			curr = curr.left
 		} else {
 			curr = curr.right
@@ -46,7 +46,7 @@ func createBST(arr []int, start, end int) *Node {
 	}
 	mid := (start + end) / 2
 	return &Node{
-		value: arr[mid],
+		key:   arr[mid],
 		left:  createBST(arr, start, mid-1),
 		right: createBST(arr, mid+1, end),
 	}
@@ -54,9 +54,9 @@ func createBST(arr []int, start, end int) *Node {
 
 func btsInsert(n *Node, x int) *Node {
 	if n == nil {
-		return &Node{value: x}
+		return &Node{key: x}
 	}
-	if x < n.value {
+	if x < n.key {
 		n.left = btsInsert(n.left, x)
 	} else {
 		n.right = btsInsert(n.right, x)
@@ -66,7 +66,7 @@ func btsInsert(n *Node, x int) *Node {
 
 func bstRemove(n *Node, x int) *Node {
 	if n != nil {
-		if n.value == x {
+		if n.key == x {
 			if n.left == nil && n.right == nil {
 				return nil
 			}
@@ -77,10 +77,10 @@ func bstRemove(n *Node, x int) *Node {
 				return n.left
 			}
 			maxNode := bstFindMax(n.left)
-			n.value = maxNode.value
-			n.left = bstRemove(n.left, maxNode.value)
+			n.key = maxNode.key
+			n.left = bstRemove(n.left, maxNode.key)
 		} else {
-			if n.value > x {
+			if n.key > x {
 				n.left = bstRemove(n.left, x)
 			} else {
 				n.right = bstRemove(n.right, x)

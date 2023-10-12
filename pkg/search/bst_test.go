@@ -29,14 +29,14 @@ func TestBST_Insert(t1 *testing.T) {
 				x: 1,
 			},
 			want: Tree{
-				root: &Node{value: 1},
+				root: &Node{key: 1},
 			},
 		},
 		{
 			name: "insert great than root",
 			fields: fields{
 				Tree: Tree{
-					root: &Node{value: 10},
+					root: &Node{key: 10},
 				},
 			},
 			args: args{
@@ -44,8 +44,8 @@ func TestBST_Insert(t1 *testing.T) {
 			},
 			want: Tree{
 				root: &Node{
-					value: 10,
-					right: &Node{value: 11},
+					key:   10,
+					right: &Node{key: 11},
 				},
 			},
 		},
@@ -53,7 +53,7 @@ func TestBST_Insert(t1 *testing.T) {
 			name: "insert less than root",
 			fields: fields{
 				Tree: Tree{
-					root: &Node{value: 10},
+					root: &Node{key: 10},
 				},
 			},
 			args: args{
@@ -61,8 +61,8 @@ func TestBST_Insert(t1 *testing.T) {
 			},
 			want: Tree{
 				root: &Node{
-					value: 10,
-					left:  &Node{value: 9},
+					key:  10,
+					left: &Node{key: 9},
 				},
 			},
 		},
