@@ -1,29 +1,29 @@
 package tree
 
-type Node struct {
+type node struct {
 	key         int
-	left, right *Node
+	left, right *node
 }
 
-func NewNode(key int) *Node {
-	return &Node{key: key}
+func newNode(key int) *node {
+	return &node{key: key}
 }
 
-func rightRotate(x *Node) *Node {
+func rightRotate(x *node) *node {
 	y := x.left
 	x.left = y.right
 	y.right = x
 	return y
 }
 
-func leftRotate(x *Node) *Node {
+func leftRotate(x *node) *node {
 	y := x.right
 	x.right = y.left
 	y.left = x
 	return y
 }
 
-func (n *Node) ToOrderedSlice() []int {
+func (n *node) ToOrderedSlice() []int {
 	res := make([]int, 0)
 	process := func(key int) {
 		res = append(res, key)
@@ -32,7 +32,7 @@ func (n *Node) ToOrderedSlice() []int {
 	return res
 }
 
-func preOrder(n *Node, process func(int)) {
+func preOrder(n *node, process func(int)) {
 	if n == nil {
 		return
 	}

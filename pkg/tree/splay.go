@@ -1,10 +1,10 @@
 package tree
 
 type SplayTree struct {
-	root *Node
+	root *node
 }
 
-func NewSplayTree() *SplayTree {
+func NewSplayTree() Tree {
 	return &SplayTree{}
 }
 
@@ -25,7 +25,7 @@ func (t *SplayTree) Remove(x int) {
 	t.root = splayRemove(t.root, x)
 }
 
-func splay(root *Node, key int) *Node {
+func splay(root *node, key int) *node {
 	if root == nil || root.key == key {
 		return root
 	}
@@ -65,15 +65,15 @@ func splay(root *Node, key int) *Node {
 	return leftRotate(root)
 }
 
-func splayInsert(root *Node, key int) *Node {
+func splayInsert(root *node, key int) *node {
 	if root == nil {
-		return NewNode(key)
+		return newNode(key)
 	}
 	root = splay(root, key)
 	if root.key == key {
 		return root
 	}
-	tmp := NewNode(key)
+	tmp := newNode(key)
 	if root.key > key {
 		tmp.right = root
 		tmp.left = root.left
@@ -86,7 +86,7 @@ func splayInsert(root *Node, key int) *Node {
 	return tmp
 }
 
-func splayRemove(root *Node, key int) *Node {
+func splayRemove(root *node, key int) *node {
 	if root == nil {
 		return nil
 	}
