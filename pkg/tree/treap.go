@@ -21,7 +21,9 @@ func NewTreap() Tree {
 }
 
 func (t *Treap) Insert(x int) {
-	t.root = treapInsert(t.root, x)
+	t1, t2 := treapSplit(t.root, x)
+	n := newTreapNode(x)
+	t.root = treapMerge(treapMerge(t1, n), t2)
 }
 
 func (t *Treap) Search(x int) bool {
@@ -95,4 +97,33 @@ func treapLeftRotate(x *treapNode) *treapNode {
 	x.right = y.left
 	y.left = x
 	return y
+}
+
+func treapMerge(t1, t2 *treapNode) *treapNode {
+	if t1 == nil {
+		return t2
+	}
+	if t2 == nil {
+		return t1
+	}
+	if t1.priority > t2.priority {
+		t1.right = treapMerge(t1.right, t2)
+		return t1
+	}
+	t2.left = treapMerge(t1, t2.left)
+	return t2
+}
+
+func treapSplit(n *treapNode, key int) (*treapNode, *treapNode) {
+	if n == nil {
+		return nil, nil
+	}
+	if key > n.key {
+		t1, t2 := treapSplit(n.right, key)
+		n.right = t1
+		return n, t2
+	}
+	t1, t2 := treapSplit(n.left, key)
+	n.left = t2
+	return t1, n
 }
